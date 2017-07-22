@@ -4,15 +4,28 @@ if(Meteor.isClient){
 	Template.leaderboard.helpers({
 		'player': function(){
 			return PlayersList.find();
+		},
+
+		'selectedClass':function(){
+			playerId=this._id;
+			selectedPlayer=Session.get('selectedPlayer')
+			if(playerId==selectedPlayer){
+			return 'selected';
+			}
 		}
 	});
 
 	Template.leaderboard.events({
 		'click .player':function(){
-			console.log("you clicked a .player element");
+			var playerId=this._id
+			Session.set('selectedPlayer',playerId);
+			var selectedPlayer=Session.get('selectedPlayer');
+			console.log(selectedPlayer);
 		}
 	});
 }
+
+
 if(Meteor.isServer){
 	
 }
