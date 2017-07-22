@@ -3,12 +3,14 @@
 </head>
 <body>
   <h1>Leaderboard</h1>
+  <p>{{>loginButtons}}</p>
    {{>addPlayerForm}}
   {{> leaderboard}}
  
 </body>
 
 <template name="leaderboard">
+{{#if currentUser}}
 <h3>Select a player...</h3>
   <ul>
     {{#each player}}
@@ -24,15 +26,20 @@
   
   {{/if}}
   </ul>
+  {{else}}
+    <i>Register or login to manage a leaderboard!</i>
+    {{/if}}
+
 </template>
 
 <template name="addPlayerForm">
+{{#if currentUser}}
+<h3>You can add your favourite players here!!</h3>
   <form>
-  <input type="submit" value="Add Player">
-  <br />
     <input type="text" name="playerName" placeholder="Enter name here..">
     <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="initialScore" placeholder="Enter score here..">
-    
+    <input type="submit" value="Add Player">
   </form>
+{{/if}}
 </template>
 
